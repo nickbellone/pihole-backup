@@ -1,30 +1,24 @@
 #!/bin/bash
-#cd /home/root/pihole_backups || exit 1
 
-# Set environment
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export PATH
 
-# Set variables
 BACKUP_DIR="" # Backup Location
 REMOTE_HOST="" # IP ADDR
-REMOTE_USER="root"
-REMOTE_PORT="5533"
+REMOTE_USER=""
+REMOTE_PORT=""
 REMOTE_PATH="" # Remote Location
 LOG_DIR="$BACKUP_DIR/logs"
 LOG_FILE="$LOG_DIR/backup_$(date '+%Y%m%d').log"
 MAX_BACKUPS=4
 
-# Create logs directory if it doesn't exist
 mkdir -p "$LOG_DIR"
 
-# Function to log messages
 log_message() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "$LOG_FILE"
     echo "$1"
 }
 
-# Start backup process
 log_message "Starting PiHole backup process"
 
 # Create PiHole backup
