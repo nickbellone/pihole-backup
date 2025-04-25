@@ -4,7 +4,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export PATH
 
 BACKUP_DIR="" # Backup Location
-REMOTE_HOST="" # IP ADDR
+REMOTE_IP=""
 REMOTE_USER=""
 REMOTE_PORT=""
 REMOTE_PATH="" # Remote Location
@@ -39,7 +39,7 @@ fi
 # Sync most recent backup
 log_message "Starting rsync of latest backup to remote server"
 if rsync -av -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p $REMOTE_PORT" "$LATEST_BACKUP" \
-    "$REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH/"; then
+    "$REMOTE_USER@$REMOTE_IP:$REMOTE_PATH/"; then
     log_message "Rsync of latest backup completed successfully"
 else
     log_message "Error: Rsync failed"
@@ -57,7 +57,7 @@ fi
 
 # Retain last two backups on remote server
 log_message "Cleaning up old backups on remote server"
-ssh -p "$REMOTE_PORT" "$REMOTE_USER@$REMOTE_HOST" "cd $REMOTE_PATH && \
+ssh -p "$REMOTE_PORT" "$REMOTE_USER@$REMOTE_IP" "cd $REMOTE_PATH && \
     ls -t *.zip 2>/dev/null | tail -n +3 | xargs -r rm --" || \
     log_message "Warning: Remote cleanup failed"
 
