@@ -3,11 +3,11 @@
 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export PATH
 
-BACKUP_DIR="" # Backup Location
+BACKUP_DIR="/your/location/here"
 REMOTE_IP=""
 REMOTE_USER=""
 REMOTE_PORT=""
-REMOTE_PATH="" # Remote Location
+REMOTE_PATH="/remote/path/here"
 LOG_DIR="$BACKUP_DIR/logs"
 LOG_FILE="$LOG_DIR/backup_$(date '+%Y%m%d').log"
 MAX_BACKUPS=4
